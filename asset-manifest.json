@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "https://boraita.github.io/static/css/main.e375db92.chunk.css",
+    "main.js": "https://boraita.github.io/static/js/main.66c8c5be.chunk.js",
+    "main.js.map": "https://boraita.github.io/static/js/main.66c8c5be.chunk.js.map",
+    "runtime-main.js": "https://boraita.github.io/static/js/runtime-main.ce1ca485.js",
+    "runtime-main.js.map": "https://boraita.github.io/static/js/runtime-main.ce1ca485.js.map",
+    "static/js/2.1071f12c.chunk.js": "https://boraita.github.io/static/js/2.1071f12c.chunk.js",
+    "static/js/2.1071f12c.chunk.js.map": "https://boraita.github.io/static/js/2.1071f12c.chunk.js.map",
+    "static/js/3.e584a834.chunk.js": "https://boraita.github.io/static/js/3.e584a834.chunk.js",
+    "static/js/3.e584a834.chunk.js.map": "https://boraita.github.io/static/js/3.e584a834.chunk.js.map",
+    "index.html": "https://boraita.github.io/index.html",
+    "static/css/main.e375db92.chunk.css.map": "https://boraita.github.io/static/css/main.e375db92.chunk.css.map",
+    "static/js/2.1071f12c.chunk.js.LICENSE.txt": "https://boraita.github.io/static/js/2.1071f12c.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ce1ca485.js",
+    "static/js/2.1071f12c.chunk.js",
+    "static/css/main.e375db92.chunk.css",
+    "static/js/main.66c8c5be.chunk.js"
+  ]
+}
