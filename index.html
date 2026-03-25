@@ -1,1 +1,759 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="icon" href="https://boraita.github.io/favicon.ico"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#000000"/><meta name="Portfolio Website Boraita" content="Web site in react.js by Rafael Montaño"/><link rel="apple-touch-icon" href="https://boraita.github.io/logo192.png"/><link rel="manifest" href="https://boraita.github.io/manifest.json"/><title>Boraita Website</title><link href="https://boraita.github.io/static/css/main.e375db92.chunk.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div><script>!function(e){function t(t){for(var n,u,a=t[0],c=t[1],l=t[2],f=0,p=[];f<a.length;f++)u=a[f],Object.prototype.hasOwnProperty.call(o,u)&&o[u]&&p.push(o[u][0]),o[u]=0;for(n in c)Object.prototype.hasOwnProperty.call(c,n)&&(e[n]=c[n]);for(s&&s(t);p.length;)p.shift()();return i.push.apply(i,l||[]),r()}function r(){for(var e,t=0;t<i.length;t++){for(var r=i[t],n=!0,a=1;a<r.length;a++){var c=r[a];0!==o[c]&&(n=!1)}n&&(i.splice(t--,1),e=u(u.s=r[0]))}return e}var n={},o={1:0},i=[];function u(t){if(n[t])return n[t].exports;var r=n[t]={i:t,l:!1,exports:{}};return e[t].call(r.exports,r,r.exports,u),r.l=!0,r.exports}u.e=function(e){var t=[],r=o[e];if(0!==r)if(r)t.push(r[2]);else{var n=new Promise((function(t,n){r=o[e]=[t,n]}));t.push(r[2]=n);var i,a=document.createElement("script");a.charset="utf-8",a.timeout=120,u.nc&&a.setAttribute("nonce",u.nc),a.src=function(e){return u.p+"static/js/"+({}[e]||e)+"."+{3:"e584a834"}[e]+".chunk.js"}(e);var c=new Error;i=function(t){a.onerror=a.onload=null,clearTimeout(l);var r=o[e];if(0!==r){if(r){var n=t&&("load"===t.type?"missing":t.type),i=t&&t.target&&t.target.src;c.message="Loading chunk "+e+" failed.\n("+n+": "+i+")",c.name="ChunkLoadError",c.type=n,c.request=i,r[1](c)}o[e]=void 0}};var l=setTimeout((function(){i({type:"timeout",target:a})}),12e4);a.onerror=a.onload=i,document.head.appendChild(a)}return Promise.all(t)},u.m=e,u.c=n,u.d=function(e,t,r){u.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:r})},u.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},u.t=function(e,t){if(1&t&&(e=u(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var r=Object.create(null);if(u.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var n in e)u.d(r,n,function(t){return e[t]}.bind(null,n));return r},u.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return u.d(t,"a",t),t},u.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},u.p="https://boraita.github.io/",u.oe=function(e){throw console.error(e),e};var a=this["webpackJsonpboraita-website"]=this["webpackJsonpboraita-website"]||[],c=a.push.bind(a);a.push=t,a=a.slice();for(var l=0;l<a.length;l++)t(a[l]);var s=c;r()}([])</script><script src="https://boraita.github.io/static/js/2.1071f12c.chunk.js"></script><script src="https://boraita.github.io/static/js/main.66c8c5be.chunk.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boraita.es</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323:wght@400&display=swap');
+
+  :root {
+    --green: #00ff41;
+    --cyan: #00d4ff;
+    --yellow: #ffd700;
+    --red: #ff4444;
+    --purple: #b44aff;
+    --bg: #0a0a0a;
+    --bg2: #0f0f1a;
+    --panel: #111122;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--green);
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.15) 2px, rgba(0,0,0,0.15) 4px);
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* LANG TOGGLE */
+  .lang-toggle {
+    position: fixed;
+    top: 12px;
+    right: 20px;
+    z-index: 2000;
+    display: flex;
+    gap: 6px;
+  }
+  .lang-btn {
+    background: transparent;
+    border: 2px solid var(--green);
+    color: var(--green);
+    font-family: 'Press Start 2P', monospace;
+    font-size: 7px;
+    padding: 5px 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .lang-btn.active { background: var(--green); color: var(--bg); }
+  .lang-btn:hover { background: var(--green); color: var(--bg); box-shadow: 0 0 10px var(--green); }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; width: 100%;
+    background: rgba(10,10,10,0.95);
+    border-bottom: 2px solid var(--green);
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .nav-logo { color: var(--yellow); font-size: 12px; text-shadow: 0 0 10px var(--yellow); }
+  .nav-links { display: flex; gap: 16px; flex-wrap: wrap; padding-right: 90px; }
+  .nav-links a {
+    color: var(--green);
+    text-decoration: none;
+    font-size: 7px;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--cyan); text-shadow: 0 0 8px var(--cyan); }
+
+  section { padding: 80px 20px 60px; max-width: 900px; margin: 0 auto; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 100px;
+    max-width: 100%;
+  }
+
+  .pixel-border {
+    border: 3px solid var(--green);
+    box-shadow: 0 0 0 3px var(--bg), 0 0 0 6px var(--green), 0 0 20px rgba(0,255,65,0.3);
+    padding: 30px;
+    margin-bottom: 24px;
+    width: 100%;
+    max-width: 700px;
+  }
+
+  .hero-tag {
+    color: var(--cyan);
+    font-size: 8px;
+    margin-bottom: 12px;
+    animation: blink 1.5s infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  .hero-name {
+    font-size: clamp(16px, 4vw, 28px);
+    color: var(--yellow);
+    text-shadow: 0 0 20px var(--yellow), 0 0 40px rgba(255,215,0,0.5);
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+  }
+  .hero-name:hover { animation: glitch 0.3s linear; }
+  @keyframes glitch {
+    0%  { text-shadow: 2px 0 red, -2px 0 cyan; }
+    25% { text-shadow: -2px 0 red, 2px 0 cyan; }
+    50% { text-shadow: 2px 2px red, -2px -2px cyan; }
+    75% { text-shadow: -2px 2px red, 2px -2px cyan; }
+    100%{ text-shadow: 0 0 20px var(--yellow); }
+  }
+
+  .hero-title {
+    color: var(--green);
+    font-size: clamp(8px, 2vw, 12px);
+    margin-bottom: 20px;
+  }
+
+  .typing {
+    color: var(--cyan);
+    font-size: 8px;
+    border-right: 2px solid var(--cyan);
+    animation: cursor 0.8s infinite;
+    white-space: nowrap;
+    overflow: hidden;
+    min-height: 1.2em;
+  }
+  @keyframes cursor { 0%,100%{border-color:var(--cyan)} 50%{border-color:transparent} }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-top: 24px;
+    width: 100%;
+    max-width: 700px;
+  }
+  .stat-card {
+    background: var(--panel);
+    border: 2px solid var(--green);
+    padding: 12px;
+    text-align: center;
+  }
+  .stat-label { color: #666; font-size: 7px; margin-bottom: 6px; }
+  .stat-val { color: var(--yellow); font-size: 10px; }
+
+  .section-header {
+    color: var(--yellow);
+    font-size: 14px;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--green);
+    text-shadow: 0 0 10px var(--yellow);
+  }
+  .section-header::before { content: '> '; color: var(--green); }
+
+  /* ABOUT */
+  .about-panel {
+    background: var(--panel);
+    border: 2px solid var(--cyan);
+    padding: 24px;
+    box-shadow: 0 0 15px rgba(0,212,255,0.2);
+  }
+  .about-panel p {
+    font-family: 'VT323', monospace;
+    font-size: 20px;
+    color: #ccc;
+    line-height: 1.6;
+  }
+  .about-panel p span { color: var(--cyan); }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media(max-width:600px){ .skills-grid { grid-template-columns: 1fr; } }
+
+  .skill-item { margin-bottom: 14px; }
+  .skill-name { color: var(--cyan); font-size: 8px; margin-bottom: 6px; display: flex; justify-content: space-between; }
+  .skill-bar { height: 12px; background: #1a1a2e; border: 1px solid #333; }
+  .skill-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--green), var(--cyan));
+    box-shadow: 0 0 8px var(--green);
+    transition: width 1.5s ease;
+  }
+  .skill-fill.purple { background: linear-gradient(90deg, var(--purple), #ff6bff); box-shadow: 0 0 8px var(--purple); }
+  .skill-fill.yellow { background: linear-gradient(90deg, var(--yellow), #ffaa00); box-shadow: 0 0 8px var(--yellow); }
+
+  /* EXPERIENCE */
+  .timeline { position: relative; padding-left: 24px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px; top: 0; bottom: 0;
+    width: 2px;
+    background: repeating-linear-gradient(180deg, var(--green) 0, var(--green) 6px, transparent 6px, transparent 12px);
+  }
+  .mission {
+    background: var(--panel);
+    border: 2px solid #1a3a1a;
+    border-left: 3px solid var(--green);
+    padding: 16px;
+    margin-bottom: 16px;
+    position: relative;
+    transition: border-color 0.3s;
+  }
+  .mission:hover { border-color: var(--cyan); box-shadow: 0 0 12px rgba(0,212,255,0.2); }
+  .mission::before {
+    content: '◆';
+    position: absolute;
+    left: -32px; top: 14px;
+    color: var(--green);
+    font-size: 12px;
+  }
+  .mission-header { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+  .mission-title { color: var(--yellow); font-size: 9px; }
+  .mission-date { color: #666; font-size: 7px; }
+  .mission-company { color: var(--cyan); font-size: 8px; margin-bottom: 6px; }
+  .mission-loc { color: #555; font-size: 7px; margin-bottom: 8px; }
+  .mission-desc { font-family: 'VT323', monospace; font-size: 16px; color: #aaa; }
+  .badge {
+    display: inline-block;
+    background: #1a2a1a;
+    border: 1px solid var(--green);
+    color: var(--green);
+    font-size: 6px;
+    padding: 2px 6px;
+    margin: 3px 2px 0;
+  }
+
+  /* TRAVEL */
+  .travel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .travel-card {
+    background: var(--panel);
+    border: 2px solid var(--purple);
+    padding: 16px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  .travel-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(180,74,255,0.3); }
+  .travel-icon { font-size: 28px; margin-bottom: 10px; display: block; }
+  .travel-name { color: var(--yellow); font-size: 8px; margin-bottom: 6px; }
+  .travel-desc { font-family: 'VT323', monospace; font-size: 16px; color: #888; }
+
+  /* CONTACT */
+  .contact-panel {
+    background: var(--panel);
+    border: 2px solid var(--yellow);
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(255,215,0,0.15);
+  }
+  .contact-prompt {
+    font-family: 'VT323', monospace;
+    font-size: 22px;
+    color: #aaa;
+    margin-bottom: 24px;
+  }
+  .contact-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+  .contact-btn {
+    display: inline-block;
+    padding: 12px 20px;
+    border: 2px solid var(--green);
+    color: var(--green);
+    text-decoration: none;
+    font-size: 8px;
+    transition: all 0.2s;
+    background: transparent;
+    cursor: pointer;
+  }
+  .contact-btn:hover { background: var(--green); color: var(--bg); box-shadow: 0 0 15px var(--green); }
+  .contact-btn.cyan { border-color: var(--cyan); color: var(--cyan); }
+  .contact-btn.cyan:hover { background: var(--cyan); color: var(--bg); box-shadow: 0 0 15px var(--cyan); }
+  .contact-btn.yellow { border-color: var(--yellow); color: var(--yellow); }
+  .contact-btn.yellow:hover { background: var(--yellow); color: var(--bg); box-shadow: 0 0 15px var(--yellow); }
+
+  footer {
+    text-align: center;
+    padding: 30px 20px;
+    border-top: 2px solid #1a1a1a;
+    color: #333;
+    font-size: 7px;
+  }
+  footer span { color: var(--red); }
+
+  /* EDUCATION */
+  .edu-grid { display: grid; gap: 12px; }
+  .edu-card {
+    background: var(--panel);
+    border: 2px solid #2a1a3a;
+    border-left: 3px solid var(--purple);
+    padding: 14px;
+  }
+  .edu-title { color: var(--purple); font-size: 9px; margin-bottom: 6px; }
+  .edu-school { color: var(--cyan); font-size: 8px; margin-bottom: 4px; }
+  .edu-year { color: #555; font-size: 7px; }
+
+  .scroll-hint {
+    animation: bounce 2s infinite;
+    color: var(--green);
+    font-size: 8px;
+    margin-top: 20px;
+  }
+  @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+
+  /* i18n */
+  [data-es], [data-en] { display: block; }
+  .lang-es [data-en] { display: none; }
+  .lang-en [data-es] { display: none; }
+  span[data-es], span[data-en] { display: inline; }
+  .lang-es span[data-en] { display: none; }
+  .lang-en span[data-es] { display: none; }
+</style>
+</head>
+<body class="lang-es">
+
+<div class="lang-toggle">
+  <button class="lang-btn active" id="btn-es" onclick="setLang('es')">ES</button>
+  <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+</div>
+
+<nav>
+  <div class="nav-logo">BORAITA.EXE</div>
+  <div class="nav-links">
+    <a href="#about"><span data-es>[SOBRE MÍ]</span><span data-en>[ABOUT]</span></a>
+    <a href="#skills">[SKILLS]</a>
+    <a href="#experience"><span data-es>[EXPERIENCIA]</span><span data-en>[XP]</span></a>
+    <a href="#travel">[TRAVEL]</a>
+    <a href="#education"><span data-es>[EDU]</span><span data-en>[EDU]</span></a>
+    <a href="#contact">[CONTACT]</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="pixel-border">
+    <div class="hero-tag">
+      <span data-es>▶ JUGADOR 1 — CARGANDO...</span>
+      <span data-en>▶ PLAYER 1 — LOADING...</span>
+    </div>
+    <div class="hero-name">RAFAEL MONTAÑO</div>
+    <div class="hero-name" style="font-size:clamp(10px,2.5vw,18px); color:var(--cyan); text-shadow:0 0 10px var(--cyan);">BORAITA</div>
+    <div class="hero-title" style="margin-top:12px;">SENIOR SOFTWARE ENGINEER</div>
+    <div class="typing" id="typing-text"></div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-label">⚔ <span data-es>NIVEL</span><span data-en>LEVEL</span></div>
+      <div class="stat-val" id="years-val">…</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">📍 <span data-es>UBICACIÓN</span><span data-en>LOCATION</span></div>
+      <div class="stat-val">GRANADA</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">🌐 <span data-es>CONEXIONES</span><span data-en>CONNECTIONS</span></div>
+      <div class="stat-val">432</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">🏆 <span data-es>MISIONES</span><span data-en>MISSIONS</span></div>
+      <div class="stat-val">9 JOBS</div>
+    </div>
+  </div>
+
+  <div class="scroll-hint" style="margin-top:30px;">▼ PRESS START ▼</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" style="padding-top:100px;">
+  <div class="section-header">
+    <span data-es>PERFIL DE PERSONAJE</span>
+    <span data-en>CHARACTER PROFILE</span>
+  </div>
+  <div class="about-panel">
+    <p data-es>
+      Me dedico al desarrollo de <span>aplicaciones web</span>, explorando tecnologías nuevas tanto en <span>back-end como front-end</span>.<br><br>
+      Con más de <span id="about-years-es">15</span> años de experiencia, empecé cuando estudié diseño web y multimedia. He liderado equipos hacia grandes desarrollos y me considero un <span>líder humano</span>, priorizando a las personas.<br><br>
+      Soy una persona apasionada, curiosa y con ganas de <span>seguir aprendiendo</span> cada día.
+    </p>
+    <p data-en>
+      I specialize in <span>web application development</span>, exploring new technologies across both <span>back-end and front-end</span>.<br><br>
+      With over <span id="about-years-en">15</span> years of experience, my journey started with web design and multimedia. I have led teams through major projects and consider myself a <span>people-first leader</span>, always prioritizing the human side.<br><br>
+      I am a passionate, curious person with a drive to <span>keep learning</span> every single day.
+    </p>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">SKILL TREE</div>
+  <div class="skills-grid">
+    <div>
+      <div class="skill-item">
+        <div class="skill-name"><span>WEB DEVELOPMENT</span><span>95%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name"><span>CYPRESS / QA</span><span>90%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name"><span>FRONT-END</span><span>88%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name"><span>BACK-END</span><span>82%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:82%"></div></div>
+      </div>
+    </div>
+    <div>
+      <div class="skill-item">
+        <div class="skill-name"><span>TEAM LEADERSHIP</span><span>92%</span></div>
+        <div class="skill-bar"><div class="skill-fill purple" style="width:92%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name"><span>NEW TECH RESEARCH</span><span>96%</span></div>
+        <div class="skill-bar"><div class="skill-fill purple" style="width:96%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name"><span>MULTIMEDIA</span><span>78%</span></div>
+        <div class="skill-bar"><div class="skill-fill yellow" style="width:78%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name"><span>COMMUNICATION</span><span>85%</span></div>
+        <div class="skill-bar"><div class="skill-fill yellow" style="width:85%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <span data-es>REGISTRO DE MISIONES</span>
+    <span data-en>MISSION LOG</span>
+  </div>
+  <div class="timeline">
+
+    <div class="mission">
+      <div class="mission-header">
+        <div class="mission-title">⚔ SENIOR SOFTWARE ENGINEER</div>
+        <div class="mission-date">JUN 2022 → <span data-es>PRESENTE</span><span data-en>PRESENT</span></div>
+      </div>
+      <div class="mission-company">SOFTONIC</div>
+      <div class="mission-loc">📍 Barcelona, Catalonia, Spain</div>
+      <div class="mission-desc">
+        <span data-es>Desarrollo de aplicaciones web avanzadas. Líder técnico en múltiples proyectos.</span>
+        <span data-en>Advanced web application development. Technical lead across multiple projects.</span>
+      </div>
+      <span class="badge">WEB DEV</span><span class="badge">CYPRESS</span><span class="badge">+7 SKILLS</span>
+    </div>
+
+    <div class="mission">
+      <div class="mission-header">
+        <div class="mission-title">⚔ SENIOR SOFTWARE DEV ENGINEER</div>
+        <div class="mission-date">SEP 2021 → JUN 2022</div>
+      </div>
+      <div class="mission-company">VERSION 1</div>
+      <div class="mission-loc">📍 Granada, Andalusia, Spain</div>
+      <div class="mission-desc">
+        <span data-es>Full-time engineering role en empresa internacional irlandesa.</span>
+        <span data-en>Full-time engineering role at an international Irish company.</span>
+      </div>
+      <span class="badge">FULL-TIME</span><span class="badge">ENTERPRISE</span>
+    </div>
+
+    <div class="mission">
+      <div class="mission-header">
+        <div class="mission-title">⚔ SENIOR SOFTWARE ENGINEER</div>
+        <div class="mission-date">JUL 2021 → JUN 2022</div>
+      </div>
+      <div class="mission-company">NOUEDA</div>
+      <div class="mission-loc">📍 Granada, Andalusia, Spain</div>
+      <div class="mission-desc">
+        <span data-es>Desarrollo y liderazgo técnico de proyectos para clientes.</span>
+        <span data-en>Technical development and leadership on client-facing projects.</span>
+      </div>
+      <span class="badge">LEADERSHIP</span>
+    </div>
+
+    <div class="mission">
+      <div class="mission-header">
+        <div class="mission-title">⚔ CONSULTANT / WEB APP DEVELOPER</div>
+        <div class="mission-date">JAN 2018 → JUL 2021</div>
+      </div>
+      <div class="mission-company">NOVATEC SOFTWARE ENGINEERING ESPAÑA</div>
+      <div class="mission-loc">📍 Granada, Spain</div>
+      <div class="mission-desc">
+        <span data-es>Consultoría y desarrollo de aplicaciones web a medida.</span>
+        <span data-en>Consulting and custom web application development.</span>
+      </div>
+      <span class="badge">CONSULTING</span><span class="badge">WEB APP</span>
+    </div>
+
+    <div class="mission">
+      <div class="mission-header">
+        <div class="mission-title">⚔ SENIOR WEB DEVELOPER</div>
+        <div class="mission-date">OCT 2017 → NOV 2017</div>
+      </div>
+      <div class="mission-company">BUYLN COMERCIOWEB S.L.</div>
+      <div class="mission-loc">📍 Greater Granada Metropolitan Area</div>
+      <div class="mission-desc">
+        <span data-es>Actualización y mejoras en la web de BedandSnow y otros proyectos.</span>
+        <span data-en>Updates and improvements to BedandSnow website and other projects.</span>
+      </div>
+      <span class="badge">WEB</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header">
+    <span data-es>HABILIDADES DESBLOQUEADAS</span>
+    <span data-en>SKILL UNLOCKS</span>
+  </div>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-title">🎓 <span data-es>INGENIERÍA INFORMÁTICA</span><span data-en>COMPUTER SCIENCE ENGINEERING</span></div>
+      <div class="edu-school">UNIVERSIDAD DE EXTREMADURA</div>
+      <div class="edu-year">
+        <span data-es>Formación universitaria · Extremadura</span>
+        <span data-en>University degree · Extremadura</span>
+      </div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-title">🎓 <span data-es>DISEÑO WEB Y MULTIMEDIA</span><span data-en>WEB DESIGN & MULTIMEDIA</span></div>
+      <div class="edu-school"><span data-es>FORMACIÓN ESPECIALIZADA</span><span data-en>SPECIALIZED TRAINING</span></div>
+      <div class="edu-year">
+        <span data-es>Inicio · Junio 2008</span>
+        <span data-en>Career start · June 2008</span>
+      </div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-title">📜 SOFTONIC CERTIFICATION</div>
+      <div class="edu-school">SOFTONIC INTERNATIONAL</div>
+      <div class="edu-year">
+        <span data-es>Verificado · Título actual confirmado</span>
+        <span data-en>Verified · Current title confirmed</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRAVEL -->
+<section id="travel">
+  <div class="section-header">
+    <span data-es>MISIONES SECUNDARIAS — MAPA MUNDIAL</span>
+    <span data-en>SIDE QUESTS — WORLD MAP</span>
+  </div>
+  <p style="font-family:'VT323',monospace; font-size:18px; color:#666; margin-bottom:24px;">
+    <span data-es>Más allá del código, el héroe también explora el mundo...</span>
+    <span data-en>Beyond the code, the hero also explores the world...</span>
+  </p>
+  <div class="travel-grid">
+    <div class="travel-card">
+      <span class="travel-icon">🏔️</span>
+      <div class="travel-name"><span data-es>AVENTURA EN MONTAÑA</span><span data-en>MOUNTAIN ADVENTURE</span></div>
+      <div class="travel-desc">
+        <span data-es>Rutas y senderismo por los mejores paisajes.</span>
+        <span data-en>Hiking trails through stunning landscapes.</span>
+      </div>
+    </div>
+    <div class="travel-card">
+      <span class="travel-icon">🌍</span>
+      <div class="travel-name"><span data-es>EUROPA DESBLOQUEADA</span><span data-en>EUROPE UNLOCKED</span></div>
+      <div class="travel-desc">
+        <span data-es>Barcelona, Granada, ciudades exploradas.</span>
+        <span data-en>Barcelona, Granada, cities explored.</span>
+      </div>
+    </div>
+    <div class="travel-card">
+      <span class="travel-icon">🍕</span>
+      <div class="travel-name"><span data-es>MISIÓN GASTRONÓMICA</span><span data-en>GASTRONOMY QUEST</span></div>
+      <div class="travel-desc">
+        <span data-es>Descubriendo sabores y culturas locales.</span>
+        <span data-en>Discovering local flavors and cultures.</span>
+      </div>
+    </div>
+    <div class="travel-card">
+      <span class="travel-icon">📸</span>
+      <div class="travel-name"><span data-es>MODO FOTOGRAFÍA</span><span data-en>PHOTOGRAPHY MODE</span></div>
+      <div class="travel-desc">
+        <span data-es>Capturando momentos en cada destino.</span>
+        <span data-en>Capturing moments at every destination.</span>
+      </div>
+    </div>
+    <div class="travel-card">
+      <span class="travel-icon">🎮</span>
+      <div class="travel-name">TECH MEETUPS</div>
+      <div class="travel-desc">
+        <span data-es>Conectando con la comunidad tech global.</span>
+        <span data-en>Connecting with the global tech community.</span>
+      </div>
+    </div>
+    <div class="travel-card">
+      <span class="travel-icon">🌊</span>
+      <div class="travel-name"><span data-es>COSTA DESBLOQUEADA</span><span data-en>COAST UNLOCK</span></div>
+      <div class="travel-desc">
+        <span data-es>Explorando playas y costas del Mediterráneo.</span>
+        <span data-en>Exploring Mediterranean beaches and coastlines.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <span data-es>CONECTAR JUGADOR</span>
+    <span data-en>CONNECT PLAYER</span>
+  </div>
+  <div class="contact-panel">
+    <div class="contact-prompt">
+      <span data-es>► ¿Tienes una misión para mí?<br>Escríbeme y empezamos a construir.</span>
+      <span data-en>► Got a mission for me?<br>Reach out and let's start building.</span>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:rafael@boraita.es" class="contact-btn">📧 EMAIL</a>
+      <a href="https://linkedin.com/in/rafaelmontanoboraita" target="_blank" class="contact-btn cyan">💼 LINKEDIN</a>
+      <a href="https://github.com/boraita" target="_blank" class="contact-btn yellow">🐙 GITHUB</a>
+    </div>
+    <div style="margin-top:24px; color:#333; font-size:7px;">
+      BORAITA.ES · GRANADA, SPAIN · PLAYER IS ONLINE ●
+    </div>
+  </div>
+</section>
+
+<footer>
+  MADE WITH <span>♥</span> BY RAFAEL MONTAÑO BORAITA · <span id="footer-year"></span><br>
+  <span style="color:#1a1a1a">INSERT COIN TO CONTINUE</span>
+</footer>
+
+<script>
+  // ── Years of experience (dynamic, from May 2010) ──────────────────────────
+  const START = new Date(2008, 5, 1); // Jun 2008
+  function calcYears() {
+    const now = new Date();
+    let years = now.getFullYear() - START.getFullYear();
+    const beforeAnniversary =
+      now.getMonth() < START.getMonth() ||
+      (now.getMonth() === START.getMonth() && now.getDate() < START.getDate());
+    if (beforeAnniversary) years--;
+    return years;
+  }
+  const yrs = calcYears();
+  document.getElementById('years-val').textContent = yrs + '+ YRS';
+  document.getElementById('about-years-es').textContent = yrs;
+  document.getElementById('about-years-en').textContent = yrs;
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+  // ── Language switching ─────────────────────────────────────────────────────
+  let currentLang = 'es';
+  function setLang(lang) {
+    document.body.className = 'lang-' + lang;
+    document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    currentLang = lang;
+    clearTimeout(typingTimeout);
+    pi = 0; ci = 0; deleting = false;
+    type();
+  }
+
+  // ── Typing animation (bilingual) ───────────────────────────────────────────
+  const phrases = {
+    es: [
+      "Apasionado del desarrollo web...",
+      "Amante de las nuevas tecnologías...",
+      "Ingeniero full-stack y líder...",
+      yrs + "+ años construyendo la web...",
+      "Siempre subiendo de nivel..."
+    ],
+    en: [
+      "Passionate software developer...",
+      "New technologies learning lover...",
+      "Full-stack engineer & leader...",
+      yrs + "+ years building the web...",
+      "Always leveling up skills..."
+    ]
+  };
+  let pi = 0, ci = 0, deleting = false, typingTimeout;
+  const el = document.getElementById('typing-text');
+
+  function type() {
+    const cur = phrases[currentLang][pi];
+    if (!deleting) {
+      el.textContent = cur.substring(0, ci++);
+      if (ci > cur.length) { deleting = true; typingTimeout = setTimeout(type, 1500); return; }
+    } else {
+      el.textContent = cur.substring(0, ci--);
+      if (ci < 0) { deleting = false; pi = (pi + 1) % phrases[currentLang].length; }
+    }
+    typingTimeout = setTimeout(type, deleting ? 40 : 80);
+  }
+  type();
+
+  // ── Skill bar animation on scroll ─────────────────────────────────────────
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.skill-fill').forEach(bar => {
+          const w = bar.style.width;
+          bar.style.width = '0';
+          setTimeout(() => bar.style.width = w, 100);
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('#skills').forEach(s => observer.observe(s));
+
+  // ── Konami code easter egg ─────────────────────────────────────────────────
+  const konami = [38,38,40,40,37,39,37,39,66,65];
+  let ki = 0;
+  document.addEventListener('keydown', e => {
+    ki = (e.keyCode === konami[ki]) ? ki + 1 : 0;
+    if (ki === konami.length) {
+      document.body.style.background = '#1a0033';
+      alert(currentLang === 'es'
+        ? '🎮 CHEAT CODE ACTIVADO!\n+9999 XP DESBLOQUEADO\nRafael modo DIOS activado ⚡'
+        : '🎮 CHEAT CODE ACTIVATED!\n+9999 XP UNLOCKED\nRafael GOD MODE enabled ⚡');
+      ki = 0;
+    }
+  });
+</script>
+</body>
+</html>
