@@ -25,7 +25,7 @@
     background: var(--bg);
     color: var(--green);
     font-family: 'Press Start 2P', monospace;
-    font-size: 10px;
+    font-size: clamp(10px, 1.2vw, 13px);
     line-height: 1.8;
     overflow-x: hidden;
   }
@@ -43,8 +43,8 @@
   /* LANG TOGGLE */
   .lang-toggle {
     position: fixed;
-    top: 12px;
-    right: 20px;
+    top: 14px;
+    right: 16px;
     z-index: 2000;
     display: flex;
     gap: 6px;
@@ -54,8 +54,8 @@
     border: 2px solid var(--green);
     color: var(--green);
     font-family: 'Press Start 2P', monospace;
-    font-size: 7px;
-    padding: 5px 8px;
+    font-size: clamp(8px, 1vw, 10px);
+    padding: 6px 10px;
     cursor: pointer;
     transition: all 0.2s;
   }
@@ -66,27 +66,47 @@
   nav {
     position: fixed;
     top: 0; width: 100%;
-    background: rgba(10,10,10,0.95);
+    background: rgba(10,10,10,0.97);
     border-bottom: 2px solid var(--green);
-    padding: 12px 20px;
+    padding: 14px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 1000;
-    flex-wrap: wrap;
-    gap: 8px;
+    gap: 10px;
   }
-  .nav-logo { color: var(--yellow); font-size: 12px; text-shadow: 0 0 10px var(--yellow); }
-  .nav-links { display: flex; gap: 16px; flex-wrap: wrap; padding-right: 90px; }
+  .nav-logo {
+    color: var(--yellow);
+    font-size: clamp(10px, 1.5vw, 14px);
+    text-shadow: 0 0 10px var(--yellow);
+    white-space: nowrap;
+  }
+  .nav-links {
+    display: flex;
+    gap: clamp(10px, 2vw, 20px);
+    flex-wrap: wrap;
+    padding-right: 80px;
+  }
   .nav-links a {
     color: var(--green);
     text-decoration: none;
-    font-size: 7px;
+    font-size: clamp(7px, 0.9vw, 10px);
     transition: color 0.2s;
+    white-space: nowrap;
   }
   .nav-links a:hover { color: var(--cyan); text-shadow: 0 0 8px var(--cyan); }
 
-  section { padding: 80px 20px 60px; max-width: 900px; margin: 0 auto; }
+  @media (max-width: 640px) {
+    nav { flex-direction: column; align-items: flex-start; padding: 10px 14px 10px; }
+    .nav-links { padding-right: 0; gap: 10px; }
+    .lang-toggle { top: 10px; right: 10px; }
+  }
+
+  section { padding: 80px 24px 60px; max-width: 960px; margin: 0 auto; }
+
+  @media (max-width: 640px) {
+    section { padding: 70px 16px 50px; }
+  }
 
   /* HERO */
   #hero {
@@ -96,32 +116,32 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding-top: 100px;
+    padding-top: 120px;
     max-width: 100%;
   }
 
   .pixel-border {
     border: 3px solid var(--green);
     box-shadow: 0 0 0 3px var(--bg), 0 0 0 6px var(--green), 0 0 20px rgba(0,255,65,0.3);
-    padding: 30px;
-    margin-bottom: 24px;
+    padding: clamp(20px, 4vw, 40px);
+    margin-bottom: 28px;
     width: 100%;
-    max-width: 700px;
+    max-width: 760px;
   }
 
   .hero-tag {
     color: var(--cyan);
-    font-size: 8px;
-    margin-bottom: 12px;
+    font-size: clamp(9px, 1.2vw, 12px);
+    margin-bottom: 14px;
     animation: blink 1.5s infinite;
   }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
   .hero-name {
-    font-size: clamp(16px, 4vw, 28px);
+    font-size: clamp(18px, 5vw, 34px);
     color: var(--yellow);
     text-shadow: 0 0 20px var(--yellow), 0 0 40px rgba(255,215,0,0.5);
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     letter-spacing: 2px;
   }
   .hero-name:hover { animation: glitch 0.3s linear; }
@@ -135,43 +155,43 @@
 
   .hero-title {
     color: var(--green);
-    font-size: clamp(8px, 2vw, 12px);
+    font-size: clamp(9px, 2vw, 15px);
     margin-bottom: 20px;
   }
 
   .typing {
     color: var(--cyan);
-    font-size: 8px;
+    font-size: clamp(9px, 1.3vw, 12px);
     border-right: 2px solid var(--cyan);
     animation: cursor 0.8s infinite;
     white-space: nowrap;
     overflow: hidden;
-    min-height: 1.2em;
+    min-height: 1.4em;
   }
   @keyframes cursor { 0%,100%{border-color:var(--cyan)} 50%{border-color:transparent} }
 
   .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 12px;
-    margin-top: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 14px;
+    margin-top: 28px;
     width: 100%;
-    max-width: 700px;
+    max-width: 760px;
   }
   .stat-card {
     background: var(--panel);
     border: 2px solid var(--green);
-    padding: 12px;
+    padding: 16px 12px;
     text-align: center;
   }
-  .stat-label { color: #666; font-size: 7px; margin-bottom: 6px; }
-  .stat-val { color: var(--yellow); font-size: 10px; }
+  .stat-label { color: #666; font-size: clamp(8px, 1vw, 10px); margin-bottom: 8px; }
+  .stat-val { color: var(--yellow); font-size: clamp(11px, 1.4vw, 14px); }
 
   .section-header {
     color: var(--yellow);
-    font-size: 14px;
-    margin-bottom: 30px;
-    padding-bottom: 10px;
+    font-size: clamp(12px, 2vw, 18px);
+    margin-bottom: 32px;
+    padding-bottom: 12px;
     border-bottom: 2px solid var(--green);
     text-shadow: 0 0 10px var(--yellow);
   }
@@ -181,14 +201,14 @@
   .about-panel {
     background: var(--panel);
     border: 2px solid var(--cyan);
-    padding: 24px;
+    padding: clamp(20px, 3vw, 32px);
     box-shadow: 0 0 15px rgba(0,212,255,0.2);
   }
   .about-panel p {
     font-family: 'VT323', monospace;
-    font-size: 20px;
+    font-size: clamp(20px, 3vw, 28px);
     color: #ccc;
-    line-height: 1.6;
+    line-height: 1.7;
   }
   .about-panel p span { color: var(--cyan); }
 
@@ -196,13 +216,19 @@
   .skills-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    gap: 20px;
   }
-  @media(max-width:600px){ .skills-grid { grid-template-columns: 1fr; } }
+  @media(max-width: 600px) { .skills-grid { grid-template-columns: 1fr; } }
 
-  .skill-item { margin-bottom: 14px; }
-  .skill-name { color: var(--cyan); font-size: 8px; margin-bottom: 6px; display: flex; justify-content: space-between; }
-  .skill-bar { height: 12px; background: #1a1a2e; border: 1px solid #333; }
+  .skill-item { margin-bottom: 18px; }
+  .skill-name {
+    color: var(--cyan);
+    font-size: clamp(8px, 1.1vw, 11px);
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .skill-bar { height: 14px; background: #1a1a2e; border: 1px solid #333; }
   .skill-fill {
     height: 100%;
     background: linear-gradient(90deg, var(--green), var(--cyan));
@@ -213,7 +239,7 @@
   .skill-fill.yellow { background: linear-gradient(90deg, var(--yellow), #ffaa00); box-shadow: 0 0 8px var(--yellow); }
 
   /* EXPERIENCE */
-  .timeline { position: relative; padding-left: 24px; }
+  .timeline { position: relative; padding-left: 28px; }
   .timeline::before {
     content: '';
     position: absolute;
@@ -225,8 +251,8 @@
     background: var(--panel);
     border: 2px solid #1a3a1a;
     border-left: 3px solid var(--green);
-    padding: 16px;
-    margin-bottom: 16px;
+    padding: clamp(14px, 2vw, 22px);
+    margin-bottom: 18px;
     position: relative;
     transition: border-color 0.3s;
   }
@@ -234,67 +260,70 @@
   .mission::before {
     content: '◆';
     position: absolute;
-    left: -32px; top: 14px;
+    left: -34px; top: 16px;
     color: var(--green);
-    font-size: 12px;
+    font-size: 13px;
   }
-  .mission-header { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
-  .mission-title { color: var(--yellow); font-size: 9px; }
-  .mission-date { color: #666; font-size: 7px; }
-  .mission-company { color: var(--cyan); font-size: 8px; margin-bottom: 6px; }
-  .mission-loc { color: #555; font-size: 7px; margin-bottom: 8px; }
-  .mission-desc { font-family: 'VT323', monospace; font-size: 16px; color: #aaa; }
+  .mission-header { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .mission-title { color: var(--yellow); font-size: clamp(9px, 1.2vw, 12px); }
+  .mission-date { color: #666; font-size: clamp(8px, 1vw, 10px); }
+  .mission-company { color: var(--cyan); font-size: clamp(9px, 1.1vw, 12px); margin-bottom: 6px; }
+  .mission-loc { color: #555; font-size: clamp(8px, 1vw, 10px); margin-bottom: 10px; }
+  .mission-desc { font-family: 'VT323', monospace; font-size: clamp(18px, 2.5vw, 24px); color: #aaa; }
   .badge {
     display: inline-block;
     background: #1a2a1a;
     border: 1px solid var(--green);
     color: var(--green);
-    font-size: 6px;
-    padding: 2px 6px;
-    margin: 3px 2px 0;
+    font-size: clamp(7px, 0.9vw, 9px);
+    padding: 3px 8px;
+    margin: 4px 2px 0;
   }
 
   /* TRAVEL */
   .travel-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px;
+    gap: 18px;
+  }
+  @media (max-width: 480px) {
+    .travel-grid { grid-template-columns: 1fr 1fr; }
   }
   .travel-card {
     background: var(--panel);
     border: 2px solid var(--purple);
-    padding: 16px;
+    padding: clamp(14px, 2vw, 22px);
     text-align: center;
     transition: transform 0.2s, box-shadow 0.2s;
     cursor: pointer;
   }
   .travel-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(180,74,255,0.3); }
-  .travel-icon { font-size: 28px; margin-bottom: 10px; display: block; }
-  .travel-name { color: var(--yellow); font-size: 8px; margin-bottom: 6px; }
-  .travel-desc { font-family: 'VT323', monospace; font-size: 16px; color: #888; }
+  .travel-icon { font-size: clamp(28px, 4vw, 40px); margin-bottom: 12px; display: block; }
+  .travel-name { color: var(--yellow); font-size: clamp(8px, 1vw, 10px); margin-bottom: 8px; }
+  .travel-desc { font-family: 'VT323', monospace; font-size: clamp(16px, 2.2vw, 22px); color: #888; }
 
   /* CONTACT */
   .contact-panel {
     background: var(--panel);
     border: 2px solid var(--yellow);
-    padding: 30px;
+    padding: clamp(24px, 4vw, 40px);
     text-align: center;
     box-shadow: 0 0 20px rgba(255,215,0,0.15);
   }
   .contact-prompt {
     font-family: 'VT323', monospace;
-    font-size: 22px;
+    font-size: clamp(22px, 3.5vw, 32px);
     color: #aaa;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
   }
   .contact-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
   .contact-btn {
     display: inline-block;
-    padding: 12px 20px;
+    padding: clamp(10px, 1.5vw, 16px) clamp(16px, 2vw, 24px);
     border: 2px solid var(--green);
     color: var(--green);
     text-decoration: none;
-    font-size: 8px;
+    font-size: clamp(9px, 1.1vw, 12px);
     transition: all 0.2s;
     background: transparent;
     cursor: pointer;
@@ -310,27 +339,27 @@
     padding: 30px 20px;
     border-top: 2px solid #1a1a1a;
     color: #333;
-    font-size: 7px;
+    font-size: clamp(8px, 1vw, 10px);
   }
   footer span { color: var(--red); }
 
   /* EDUCATION */
-  .edu-grid { display: grid; gap: 12px; }
+  .edu-grid { display: grid; gap: 14px; }
   .edu-card {
     background: var(--panel);
     border: 2px solid #2a1a3a;
     border-left: 3px solid var(--purple);
-    padding: 14px;
+    padding: clamp(14px, 2vw, 20px);
   }
-  .edu-title { color: var(--purple); font-size: 9px; margin-bottom: 6px; }
-  .edu-school { color: var(--cyan); font-size: 8px; margin-bottom: 4px; }
-  .edu-year { color: #555; font-size: 7px; }
+  .edu-title { color: var(--purple); font-size: clamp(9px, 1.2vw, 12px); margin-bottom: 8px; }
+  .edu-school { color: var(--cyan); font-size: clamp(9px, 1.1vw, 11px); margin-bottom: 6px; }
+  .edu-year { color: #555; font-size: clamp(8px, 1vw, 10px); }
 
   .scroll-hint {
     animation: bounce 2s infinite;
     color: var(--green);
-    font-size: 8px;
-    margin-top: 20px;
+    font-size: clamp(9px, 1.2vw, 12px);
+    margin-top: 24px;
   }
   @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
 
@@ -370,7 +399,7 @@
       <span data-en>▶ PLAYER 1 — LOADING...</span>
     </div>
     <div class="hero-name">RAFAEL MONTAÑO</div>
-    <div class="hero-name" style="font-size:clamp(10px,2.5vw,18px); color:var(--cyan); text-shadow:0 0 10px var(--cyan);">BORAITA</div>
+    <div class="hero-name" style="font-size:clamp(14px,3.5vw,24px); color:var(--cyan); text-shadow:0 0 10px var(--cyan);">BORAITA</div>
     <div class="hero-title" style="margin-top:12px;">SENIOR SOFTWARE ENGINEER</div>
     <div class="typing" id="typing-text"></div>
   </div>
