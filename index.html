@@ -40,40 +40,19 @@
     z-index: 9999;
   }
 
-  /* LANG TOGGLE */
-  .lang-toggle {
-    position: fixed;
-    top: 14px;
-    right: 16px;
-    z-index: 2000;
-    display: flex;
-    gap: 6px;
-  }
-  .lang-btn {
-    background: transparent;
-    border: 2px solid var(--green);
-    color: var(--green);
-    font-family: 'Press Start 2P', monospace;
-    font-size: clamp(8px, 1vw, 10px);
-    padding: 6px 10px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .lang-btn.active { background: var(--green); color: var(--bg); }
-  .lang-btn:hover { background: var(--green); color: var(--bg); box-shadow: 0 0 10px var(--green); }
-
   /* NAV */
   nav {
     position: fixed;
-    top: 0; width: 100%;
+    top: 0; left: 0; width: 100%;
     background: rgba(10,10,10,0.97);
     border-bottom: 2px solid var(--green);
-    padding: 14px 20px;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
     align-items: center;
+    gap: 14px;
+    padding: 12px 20px;
     z-index: 1000;
-    gap: 10px;
+    min-height: 58px;
   }
   .nav-logo {
     color: var(--yellow);
@@ -83,29 +62,70 @@
   }
   .nav-links {
     display: flex;
-    gap: clamp(10px, 2vw, 20px);
+    justify-content: center;
+    gap: clamp(10px, 1.6vw, 18px);
     flex-wrap: wrap;
-    padding-right: 80px;
   }
   .nav-links a {
     color: var(--green);
     text-decoration: none;
-    font-size: clamp(7px, 0.9vw, 10px);
+    font-size: clamp(7px, 0.85vw, 10px);
     transition: color 0.2s;
     white-space: nowrap;
   }
   .nav-links a:hover { color: var(--cyan); text-shadow: 0 0 8px var(--cyan); }
-
-  @media (max-width: 640px) {
-    nav { flex-direction: column; align-items: flex-start; padding: 10px 14px 10px; }
-    .nav-links { padding-right: 0; gap: 10px; }
-    .lang-toggle { top: 10px; right: 10px; }
+  .nav-lang { display: flex; gap: 6px; }
+  .lang-btn {
+    background: transparent;
+    border: 2px solid var(--green);
+    color: var(--green);
+    font-family: 'Press Start 2P', monospace;
+    font-size: clamp(8px, 1vw, 10px);
+    padding: 5px 9px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .lang-btn.active { background: var(--green); color: var(--bg); }
+  .lang-btn:hover { background: var(--green); color: var(--bg); box-shadow: 0 0 10px var(--green); }
+  .nav-toggle {
+    display: none;
+    background: transparent;
+    border: 2px solid var(--green);
+    color: var(--green);
+    font-size: 20px;
+    line-height: 1;
+    padding: 4px 10px;
+    cursor: pointer;
   }
 
-  section { padding: 80px 24px 60px; max-width: 960px; margin: 0 auto; }
+  @media (max-width: 860px) {
+    nav { grid-template-columns: auto 1fr auto; }
+    .nav-toggle { display: inline-block; }
+    .nav-links {
+      position: absolute;
+      top: 100%; left: 0; right: 0;
+      background: rgba(10,10,10,0.98);
+      border-bottom: 2px solid var(--green);
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 14px 20px;
+      gap: 14px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    nav.open .nav-links { max-height: 80vh; }
+    .nav-links a { font-size: 11px; }
+  }
 
+  section {
+    padding: 80px 24px 60px;
+    max-width: 960px;
+    margin: 0 auto;
+    scroll-margin-top: 70px;
+  }
   @media (max-width: 640px) {
-    section { padding: 70px 16px 50px; }
+    section { padding: 64px 16px 48px; }
   }
 
   /* HERO */
@@ -508,23 +528,23 @@
 </head>
 <body class="lang-es">
 
-<div class="lang-toggle">
-  <button class="lang-btn active" id="btn-es" onclick="setLang('es')">ES</button>
-  <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
-</div>
-
-<nav>
+<nav id="nav">
   <div class="nav-logo">BORAITA.EXE</div>
-  <div class="nav-links">
+  <div class="nav-links" id="nav-links">
     <a href="#about"><span data-es>[SOBRE MÍ]</span><span data-en>[ABOUT]</span></a>
     <a href="#skills">[SKILLS]</a>
     <a href="#experience"><span data-es>[EXPERIENCIA]</span><span data-en>[XP]</span></a>
-    <a href="#hobbies"><span data-es>[HOBBIES]</span><span data-en>[HOBBIES]</span></a>
-    <a href="#arcade">[ARCADE]</a>
+    <a href="#education">[EDU]</a>
+    <a href="#hobbies">[HOBBIES]</a>
     <a href="#travel">[TRAVEL]</a>
-    <a href="#education"><span data-es>[EDU]</span><span data-en>[EDU]</span></a>
+    <a href="#arcade">[ARCADE]</a>
     <a href="#contact">[CONTACT]</a>
   </div>
+  <div class="nav-lang">
+    <button class="lang-btn active" id="btn-es" onclick="setLang('es')" aria-label="Español">ES</button>
+    <button class="lang-btn" id="btn-en" onclick="setLang('en')" aria-label="English">EN</button>
+  </div>
+  <button class="nav-toggle" id="nav-toggle" aria-label="menu" aria-expanded="false">☰</button>
 </nav>
 
 <!-- HERO -->
@@ -563,7 +583,7 @@
 </section>
 
 <!-- ABOUT -->
-<section id="about" style="padding-top:100px;">
+<section id="about">
   <div class="section-header">
     <span data-es>PERFIL DE PERSONAJE</span>
     <span data-en>CHARACTER PROFILE</span>
@@ -706,6 +726,40 @@
   </div>
 </section>
 
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header">
+    <span data-es>HABILIDADES DESBLOQUEADAS</span>
+    <span data-en>SKILL UNLOCKS</span>
+  </div>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-title">🎓 <span data-es>INGENIERÍA INFORMÁTICA</span><span data-en>COMPUTER SCIENCE ENGINEERING</span></div>
+      <div class="edu-school">UNIVERSIDAD DE EXTREMADURA</div>
+      <div class="edu-year">
+        <span data-es>Formación universitaria · Extremadura</span>
+        <span data-en>University degree · Extremadura</span>
+      </div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-title">🎓 <span data-es>DISEÑO WEB Y MULTIMEDIA</span><span data-en>WEB DESIGN & MULTIMEDIA</span></div>
+      <div class="edu-school"><span data-es>FORMACIÓN ESPECIALIZADA</span><span data-en>SPECIALIZED TRAINING</span></div>
+      <div class="edu-year">
+        <span data-es>Inicio · Junio 2008</span>
+        <span data-en>Career start · June 2008</span>
+      </div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-title">📜 SOFTONIC CERTIFICATION</div>
+      <div class="edu-school">SOFTONIC INTERNATIONAL</div>
+      <div class="edu-year">
+        <span data-es>Verificado · Título actual confirmado</span>
+        <span data-en>Verified · Current title confirmed</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- HOBBIES -->
 <section id="hobbies">
   <div class="section-header">
@@ -747,85 +801,6 @@
       <div class="hobby-desc">
         <span data-es>La <span>IA</span> es el power-up que desbloquea metas aún más grandes. Construir con agentes, automatizar lo repetitivo, <span>ir más lejos</span>.</span>
         <span data-en>New tech and <span>AI</span> are the power-ups unlocking even bigger goals. Building with agents, automating the repetitive, <span>going further</span>.</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ARCADE -->
-<section id="arcade">
-  <div class="section-header">
-    <span data-es>MINI-ARCADE · SNAKE.EXE</span>
-    <span data-en>MINI-ARCADE · SNAKE.EXE</span>
-  </div>
-  <div class="arcade-wrap">
-    <div class="arcade-subtitle">
-      <span data-es>► Come los pixels. No muerdas tu cola. Buena suerte, jugador.</span>
-      <span data-en>► Eat the pixels. Don't bite your tail. Good luck, player.</span>
-    </div>
-    <div class="arcade-stats">
-      <span><span data-es>PUNTOS</span><span data-en>SCORE</span>: <b id="snake-score">0</b></span>
-      <span><span data-es>RÉCORD</span><span data-en>HIGH</span>: <b id="snake-high">0</b></span>
-      <span><span data-es>VELOCIDAD</span><span data-en>SPEED</span>: <b id="snake-speed">1x</b></span>
-    </div>
-    <div class="arcade-canvas-wrap">
-      <canvas id="snake-canvas" width="400" height="400" aria-label="Snake game"></canvas>
-      <div class="arcade-overlay" id="snake-overlay">
-        <div class="big" id="overlay-title">
-          <span data-es>PRESIONA START</span>
-          <span data-en>PRESS START</span>
-        </div>
-        <div class="small" id="overlay-hint">
-          <span data-es>Flechas o WASD · Toca para móvil</span>
-          <span data-en>Arrows or WASD · Tap for mobile</span>
-        </div>
-        <button class="arcade-btn" id="snake-start">▶ START</button>
-      </div>
-    </div>
-    <div class="dpad" id="snake-dpad" aria-hidden="true">
-      <button class="up" data-dir="up">▲</button>
-      <button class="left" data-dir="left">◀</button>
-      <button class="right" data-dir="right">▶</button>
-      <button class="down" data-dir="down">▼</button>
-    </div>
-    <div class="arcade-controls">
-      <span class="kbd-hint">
-        <span data-es>Mueve: <kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> o <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> · Pausa: <kbd>P</kbd></span>
-        <span data-en>Move: <kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> or <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> · Pause: <kbd>P</kbd></span>
-      </span>
-    </div>
-  </div>
-</section>
-
-<!-- EDUCATION -->
-<section id="education">
-  <div class="section-header">
-    <span data-es>HABILIDADES DESBLOQUEADAS</span>
-    <span data-en>SKILL UNLOCKS</span>
-  </div>
-  <div class="edu-grid">
-    <div class="edu-card">
-      <div class="edu-title">🎓 <span data-es>INGENIERÍA INFORMÁTICA</span><span data-en>COMPUTER SCIENCE ENGINEERING</span></div>
-      <div class="edu-school">UNIVERSIDAD DE EXTREMADURA</div>
-      <div class="edu-year">
-        <span data-es>Formación universitaria · Extremadura</span>
-        <span data-en>University degree · Extremadura</span>
-      </div>
-    </div>
-    <div class="edu-card">
-      <div class="edu-title">🎓 <span data-es>DISEÑO WEB Y MULTIMEDIA</span><span data-en>WEB DESIGN & MULTIMEDIA</span></div>
-      <div class="edu-school"><span data-es>FORMACIÓN ESPECIALIZADA</span><span data-en>SPECIALIZED TRAINING</span></div>
-      <div class="edu-year">
-        <span data-es>Inicio · Junio 2008</span>
-        <span data-en>Career start · June 2008</span>
-      </div>
-    </div>
-    <div class="edu-card">
-      <div class="edu-title">📜 SOFTONIC CERTIFICATION</div>
-      <div class="edu-school">SOFTONIC INTERNATIONAL</div>
-      <div class="edu-year">
-        <span data-es>Verificado · Título actual confirmado</span>
-        <span data-en>Verified · Current title confirmed</span>
       </div>
     </div>
   </div>
@@ -889,6 +864,51 @@
         <span data-es>Explorando playas y costas del Mediterráneo.</span>
         <span data-en>Exploring Mediterranean beaches and coastlines.</span>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCADE -->
+<section id="arcade">
+  <div class="section-header">
+    <span data-es>MINI-ARCADE · SNAKE.EXE</span>
+    <span data-en>MINI-ARCADE · SNAKE.EXE</span>
+  </div>
+  <div class="arcade-wrap">
+    <div class="arcade-subtitle">
+      <span data-es>► Come los pixels. No muerdas tu cola. Buena suerte, jugador.</span>
+      <span data-en>► Eat the pixels. Don't bite your tail. Good luck, player.</span>
+    </div>
+    <div class="arcade-stats">
+      <span><span data-es>PUNTOS</span><span data-en>SCORE</span>: <b id="snake-score">0</b></span>
+      <span><span data-es>RÉCORD</span><span data-en>HIGH</span>: <b id="snake-high">0</b></span>
+      <span><span data-es>VELOCIDAD</span><span data-en>SPEED</span>: <b id="snake-speed">1x</b></span>
+    </div>
+    <div class="arcade-canvas-wrap">
+      <canvas id="snake-canvas" width="400" height="400" aria-label="Snake game"></canvas>
+      <div class="arcade-overlay" id="snake-overlay">
+        <div class="big" id="overlay-title">
+          <span data-es>PRESIONA START</span>
+          <span data-en>PRESS START</span>
+        </div>
+        <div class="small" id="overlay-hint">
+          <span data-es>Flechas o WASD · Toca para móvil</span>
+          <span data-en>Arrows or WASD · Tap for mobile</span>
+        </div>
+        <button class="arcade-btn" id="snake-start">▶ START</button>
+      </div>
+    </div>
+    <div class="dpad" id="snake-dpad" aria-hidden="true">
+      <button class="up" data-dir="up">▲</button>
+      <button class="left" data-dir="left">◀</button>
+      <button class="right" data-dir="right">▶</button>
+      <button class="down" data-dir="down">▼</button>
+    </div>
+    <div class="arcade-controls">
+      <span class="kbd-hint">
+        <span data-es>Mueve: <kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> o <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> · Pausa: <kbd>P</kbd></span>
+        <span data-en>Move: <kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> or <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> · Pause: <kbd>P</kbd></span>
+      </span>
     </div>
   </div>
 </section>
@@ -997,6 +1017,26 @@
     });
   }, { threshold: 0.3 });
   document.querySelectorAll('#skills').forEach(s => observer.observe(s));
+
+  // ── Mobile nav toggle ──────────────────────────────────────────────────────
+  (function(){
+    const nav = document.getElementById('nav');
+    const btn = document.getElementById('nav-toggle');
+    const links = document.getElementById('nav-links');
+    if (!nav || !btn || !links) return;
+    btn.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+      btn.textContent = open ? '✕' : '☰';
+    });
+    links.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        nav.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.textContent = '☰';
+      });
+    });
+  })();
 
   // ── Email obfuscation (reveal on click, no plain address in HTML) ─────────
   (function(){
