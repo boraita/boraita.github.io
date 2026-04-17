@@ -363,6 +363,140 @@
   }
   @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
 
+  /* HOBBIES */
+  .hobbies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+  }
+  .hobby-card {
+    background: var(--panel);
+    border: 2px solid var(--green);
+    padding: clamp(16px, 2.5vw, 24px);
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  }
+  .hobby-card:hover { transform: translateY(-4px); border-color: var(--cyan); box-shadow: 0 8px 20px rgba(0,212,255,0.25); }
+  .hobby-card.fam { border-color: var(--red); }
+  .hobby-card.fam:hover { box-shadow: 0 8px 20px rgba(255,68,68,0.25); }
+  .hobby-card.sport { border-color: var(--yellow); }
+  .hobby-card.sport:hover { box-shadow: 0 8px 20px rgba(255,215,0,0.25); }
+  .hobby-card.ai { border-color: var(--purple); }
+  .hobby-card.ai:hover { box-shadow: 0 8px 20px rgba(180,74,255,0.3); }
+  .hobby-icon { font-size: clamp(28px, 4vw, 40px); margin-bottom: 12px; display: block; }
+  .hobby-name { color: var(--yellow); font-size: clamp(9px, 1.2vw, 12px); margin-bottom: 10px; letter-spacing: 1px; }
+  .hobby-desc { font-family: 'VT323', monospace; font-size: clamp(18px, 2.4vw, 24px); color: #bbb; line-height: 1.5; }
+  .hobby-desc span { color: var(--cyan); }
+  .hobby-card.ai .hobby-name { color: var(--purple); text-shadow: 0 0 8px var(--purple); }
+
+  /* ARCADE */
+  .arcade-wrap {
+    background: var(--panel);
+    border: 3px solid var(--cyan);
+    padding: clamp(16px, 3vw, 28px);
+    box-shadow: 0 0 25px rgba(0,212,255,0.25);
+    text-align: center;
+  }
+  .arcade-subtitle {
+    font-family: 'VT323', monospace;
+    font-size: clamp(18px, 2.5vw, 24px);
+    color: #888;
+    margin-bottom: 18px;
+  }
+  .arcade-stats {
+    display: flex;
+    justify-content: center;
+    gap: clamp(14px, 3vw, 30px);
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+    font-size: clamp(9px, 1.1vw, 11px);
+  }
+  .arcade-stats span { color: var(--yellow); }
+  .arcade-stats b { color: var(--green); font-weight: normal; }
+  .arcade-canvas-wrap {
+    display: inline-block;
+    position: relative;
+    max-width: 100%;
+  }
+  #snake-canvas {
+    background: #050510;
+    border: 2px solid var(--green);
+    box-shadow: 0 0 15px rgba(0,255,65,0.3), inset 0 0 30px rgba(0,255,65,0.05);
+    image-rendering: pixelated;
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+    touch-action: none;
+  }
+  .arcade-overlay {
+    position: absolute;
+    inset: 2px;
+    background: rgba(5,5,16,0.88);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    color: var(--cyan);
+    font-size: clamp(10px, 1.4vw, 14px);
+    text-align: center;
+    padding: 10px;
+  }
+  .arcade-overlay.hidden { display: none; }
+  .arcade-overlay .big { color: var(--yellow); font-size: clamp(14px, 2.5vw, 22px); text-shadow: 0 0 10px var(--yellow); }
+  .arcade-overlay .small { color: #888; font-size: clamp(8px, 1vw, 10px); font-family: 'Press Start 2P', monospace; }
+  .arcade-btn {
+    background: transparent;
+    border: 2px solid var(--green);
+    color: var(--green);
+    font-family: 'Press Start 2P', monospace;
+    font-size: clamp(9px, 1.1vw, 12px);
+    padding: 10px 18px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .arcade-btn:hover { background: var(--green); color: var(--bg); box-shadow: 0 0 15px var(--green); }
+  .arcade-controls {
+    margin-top: 16px;
+    font-family: 'VT323', monospace;
+    font-size: clamp(16px, 2vw, 20px);
+    color: #777;
+  }
+  .arcade-controls kbd {
+    display: inline-block;
+    background: #1a1a2e;
+    border: 1px solid var(--green);
+    color: var(--green);
+    padding: 2px 7px;
+    margin: 0 2px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 9px;
+  }
+  .dpad {
+    display: none;
+    grid-template-columns: repeat(3, 54px);
+    grid-template-rows: repeat(3, 54px);
+    gap: 4px;
+    justify-content: center;
+    margin: 16px auto 0;
+  }
+  .dpad button {
+    background: var(--panel);
+    border: 2px solid var(--green);
+    color: var(--green);
+    font-size: 22px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+  .dpad button:active { background: var(--green); color: var(--bg); }
+  .dpad .up    { grid-column: 2; grid-row: 1; }
+  .dpad .left  { grid-column: 1; grid-row: 2; }
+  .dpad .right { grid-column: 3; grid-row: 2; }
+  .dpad .down  { grid-column: 2; grid-row: 3; }
+  @media (hover: none) and (pointer: coarse) { .dpad { display: grid; } .arcade-controls .kbd-hint { display: none; } }
+
   /* i18n */
   [data-es], [data-en] { display: block; }
   .lang-es [data-en] { display: none; }
@@ -385,6 +519,8 @@
     <a href="#about"><span data-es>[SOBRE MÍ]</span><span data-en>[ABOUT]</span></a>
     <a href="#skills">[SKILLS]</a>
     <a href="#experience"><span data-es>[EXPERIENCIA]</span><span data-en>[XP]</span></a>
+    <a href="#hobbies"><span data-es>[HOBBIES]</span><span data-en>[HOBBIES]</span></a>
+    <a href="#arcade">[ARCADE]</a>
     <a href="#travel">[TRAVEL]</a>
     <a href="#education"><span data-es>[EDU]</span><span data-en>[EDU]</span></a>
     <a href="#contact">[CONTACT]</a>
@@ -567,6 +703,97 @@
       <span class="badge">WEB</span>
     </div>
 
+  </div>
+</section>
+
+<!-- HOBBIES -->
+<section id="hobbies">
+  <div class="section-header">
+    <span data-es>INVENTARIO DE VIDA</span>
+    <span data-en>LIFE INVENTORY</span>
+  </div>
+  <p style="font-family:'VT323',monospace; font-size:20px; color:#777; margin-bottom:24px;">
+    <span data-es>Lo que me carga la barra de energía más allá del código...</span>
+    <span data-en>What refills my energy bar beyond the code...</span>
+  </p>
+  <div class="hobbies-grid">
+    <div class="hobby-card fam">
+      <span class="hobby-icon">👨‍👩‍👧‍👦</span>
+      <div class="hobby-name"><span data-es>FAMILIA · +100 HP</span><span data-en>FAMILY · +100 HP</span></div>
+      <div class="hobby-desc">
+        <span data-es>Disfrutar a mi familia es <span>la misión principal</span>. El resto son side quests.</span>
+        <span data-en>Time with my family is <span>the main quest</span>. Everything else is a side quest.</span>
+      </div>
+    </div>
+    <div class="hobby-card sport">
+      <span class="hobby-icon">🏃‍♂️</span>
+      <div class="hobby-name"><span data-es>DEPORTE · +STAMINA</span><span data-en>SPORTS · +STAMINA</span></div>
+      <div class="hobby-desc">
+        <span data-es>Deporte como <span>reset mental</span>. Mantiene el CPU fresco y el ánimo al máximo.</span>
+        <span data-en>Sports as a <span>mental reset</span>. Keeps the CPU cool and mood at max.</span>
+      </div>
+    </div>
+    <div class="hobby-card">
+      <span class="hobby-icon">💻</span>
+      <div class="hobby-name"><span data-es>PROGRAMAR · +INT</span><span data-en>CODING · +INT</span></div>
+      <div class="hobby-desc">
+        <span data-es>Programar es hobby y profesión. Cada proyecto, una <span>nueva misión</span>.</span>
+        <span data-en>Coding is both hobby and job. Every project, a <span>new mission</span>.</span>
+      </div>
+    </div>
+    <div class="hobby-card ai">
+      <span class="hobby-icon">🤖</span>
+      <div class="hobby-name"><span data-es>AI · NUEVO ALICIENTE</span><span data-en>AI · NEW POWER-UP</span></div>
+      <div class="hobby-desc">
+        <span data-es>La <span>IA</span> es el power-up que desbloquea metas aún más grandes. Construir con agentes, automatizar lo repetitivo, <span>ir más lejos</span>.</span>
+        <span data-en>New tech and <span>AI</span> are the power-ups unlocking even bigger goals. Building with agents, automating the repetitive, <span>going further</span>.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCADE -->
+<section id="arcade">
+  <div class="section-header">
+    <span data-es>MINI-ARCADE · SNAKE.EXE</span>
+    <span data-en>MINI-ARCADE · SNAKE.EXE</span>
+  </div>
+  <div class="arcade-wrap">
+    <div class="arcade-subtitle">
+      <span data-es>► Come los pixels. No muerdas tu cola. Buena suerte, jugador.</span>
+      <span data-en>► Eat the pixels. Don't bite your tail. Good luck, player.</span>
+    </div>
+    <div class="arcade-stats">
+      <span><span data-es>PUNTOS</span><span data-en>SCORE</span>: <b id="snake-score">0</b></span>
+      <span><span data-es>RÉCORD</span><span data-en>HIGH</span>: <b id="snake-high">0</b></span>
+      <span><span data-es>VELOCIDAD</span><span data-en>SPEED</span>: <b id="snake-speed">1x</b></span>
+    </div>
+    <div class="arcade-canvas-wrap">
+      <canvas id="snake-canvas" width="400" height="400" aria-label="Snake game"></canvas>
+      <div class="arcade-overlay" id="snake-overlay">
+        <div class="big" id="overlay-title">
+          <span data-es>PRESIONA START</span>
+          <span data-en>PRESS START</span>
+        </div>
+        <div class="small" id="overlay-hint">
+          <span data-es>Flechas o WASD · Toca para móvil</span>
+          <span data-en>Arrows or WASD · Tap for mobile</span>
+        </div>
+        <button class="arcade-btn" id="snake-start">▶ START</button>
+      </div>
+    </div>
+    <div class="dpad" id="snake-dpad" aria-hidden="true">
+      <button class="up" data-dir="up">▲</button>
+      <button class="left" data-dir="left">◀</button>
+      <button class="right" data-dir="right">▶</button>
+      <button class="down" data-dir="down">▼</button>
+    </div>
+    <div class="arcade-controls">
+      <span class="kbd-hint">
+        <span data-es>Mueve: <kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> o <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> · Pausa: <kbd>P</kbd></span>
+        <span data-en>Move: <kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> or <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> · Pause: <kbd>P</kbd></span>
+      </span>
+    </div>
   </div>
 </section>
 
@@ -769,6 +996,177 @@
     });
   }, { threshold: 0.3 });
   document.querySelectorAll('#skills').forEach(s => observer.observe(s));
+
+  // ── Snake game ─────────────────────────────────────────────────────────────
+  (function(){
+    const canvas = document.getElementById('snake-canvas');
+    const ctx = canvas.getContext('2d');
+    const scoreEl = document.getElementById('snake-score');
+    const highEl = document.getElementById('snake-high');
+    const speedEl = document.getElementById('snake-speed');
+    const overlay = document.getElementById('snake-overlay');
+    const overlayTitle = document.getElementById('overlay-title');
+    const overlayHint = document.getElementById('overlay-hint');
+    const startBtn = document.getElementById('snake-start');
+    const dpad = document.getElementById('snake-dpad');
+
+    const GRID = 20, CELL = canvas.width / GRID;
+    let snake, dir, nextDir, food, score, high, running, paused, tickMs, loopId;
+
+    high = parseInt(localStorage.getItem('boraita_snake_high') || '0', 10);
+    highEl.textContent = high;
+
+    function reset() {
+      snake = [{x:10,y:10},{x:9,y:10},{x:8,y:10}];
+      dir = {x:1,y:0};
+      nextDir = dir;
+      score = 0;
+      tickMs = 130;
+      speedEl.textContent = '1x';
+      placeFood();
+      scoreEl.textContent = score;
+      draw();
+    }
+
+    function placeFood() {
+      while (true) {
+        const f = { x: Math.floor(Math.random()*GRID), y: Math.floor(Math.random()*GRID) };
+        if (!snake.some(s => s.x===f.x && s.y===f.y)) { food = f; return; }
+      }
+    }
+
+    function step() {
+      dir = nextDir;
+      const head = { x: snake[0].x + dir.x, y: snake[0].y + dir.y };
+      if (head.x<0 || head.x>=GRID || head.y<0 || head.y>=GRID) return gameOver();
+      if (snake.some(s => s.x===head.x && s.y===head.y)) return gameOver();
+      snake.unshift(head);
+      if (head.x===food.x && head.y===food.y) {
+        score += 10;
+        scoreEl.textContent = score;
+        if (score % 50 === 0 && tickMs > 60) {
+          tickMs -= 10;
+          const mult = (130 / tickMs).toFixed(1);
+          speedEl.textContent = mult + 'x';
+          clearInterval(loopId);
+          loopId = setInterval(tick, tickMs);
+        }
+        placeFood();
+      } else {
+        snake.pop();
+      }
+      draw();
+    }
+
+    function tick() { if (running && !paused) step(); }
+
+    function draw() {
+      ctx.fillStyle = '#050510';
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+      ctx.strokeStyle = 'rgba(0,255,65,0.06)';
+      ctx.lineWidth = 1;
+      for (let i=1;i<GRID;i++){
+        ctx.beginPath(); ctx.moveTo(i*CELL,0); ctx.lineTo(i*CELL,canvas.height); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(0,i*CELL); ctx.lineTo(canvas.width,i*CELL); ctx.stroke();
+      }
+      ctx.fillStyle = '#ffd700';
+      ctx.shadowColor = '#ffd700'; ctx.shadowBlur = 12;
+      ctx.fillRect(food.x*CELL+3, food.y*CELL+3, CELL-6, CELL-6);
+      ctx.shadowBlur = 0;
+      snake.forEach((s,i) => {
+        ctx.fillStyle = i===0 ? '#00d4ff' : '#00ff41';
+        if (i===0) { ctx.shadowColor = '#00d4ff'; ctx.shadowBlur = 10; }
+        else { ctx.shadowBlur = 0; }
+        ctx.fillRect(s.x*CELL+1, s.y*CELL+1, CELL-2, CELL-2);
+      });
+      ctx.shadowBlur = 0;
+    }
+
+    function gameOver() {
+      running = false;
+      clearInterval(loopId);
+      if (score > high) {
+        high = score;
+        localStorage.setItem('boraita_snake_high', high);
+        highEl.textContent = high;
+      }
+      const es = currentLang === 'es';
+      overlayTitle.innerHTML = es
+        ? '<span data-es>GAME OVER · ' + score + ' PTS</span>'
+        : '<span data-en>GAME OVER · ' + score + ' PTS</span>';
+      overlayHint.innerHTML = es
+        ? '<span data-es>Récord: ' + high + ' · ¿Otra ronda?</span>'
+        : '<span data-en>High: ' + high + ' · One more round?</span>';
+      startBtn.textContent = es ? '↻ REINTENTAR' : '↻ RETRY';
+      overlay.classList.remove('hidden');
+    }
+
+    function start() {
+      reset();
+      running = true; paused = false;
+      overlay.classList.add('hidden');
+      clearInterval(loopId);
+      loopId = setInterval(tick, tickMs);
+    }
+
+    function togglePause() {
+      if (!running) return;
+      paused = !paused;
+      if (paused) {
+        overlayTitle.textContent = currentLang === 'es' ? 'PAUSA' : 'PAUSED';
+        overlayHint.textContent = currentLang === 'es' ? 'Pulsa P para continuar' : 'Press P to resume';
+        startBtn.textContent = currentLang === 'es' ? '▶ SEGUIR' : '▶ RESUME';
+        overlay.classList.remove('hidden');
+      } else {
+        overlay.classList.add('hidden');
+      }
+    }
+
+    function setDir(d) {
+      const map = { up:{x:0,y:-1}, down:{x:0,y:1}, left:{x:-1,y:0}, right:{x:1,y:0} };
+      const nd = map[d]; if (!nd) return;
+      if (nd.x === -dir.x && nd.y === -dir.y) return;
+      nextDir = nd;
+    }
+
+    startBtn.addEventListener('click', () => { if (paused) togglePause(); else start(); });
+
+    document.addEventListener('keydown', (e) => {
+      const k = e.key.toLowerCase();
+      const inArcade = window.scrollY + window.innerHeight/2 >
+        document.getElementById('arcade').offsetTop;
+      if (['arrowup','arrowdown','arrowleft','arrowright','w','a','s','d','p'].includes(k) && inArcade) {
+        e.preventDefault();
+      }
+      if (k==='arrowup'||k==='w') setDir('up');
+      else if (k==='arrowdown'||k==='s') setDir('down');
+      else if (k==='arrowleft'||k==='a') setDir('left');
+      else if (k==='arrowright'||k==='d') setDir('right');
+      else if (k==='p') togglePause();
+    });
+
+    dpad.querySelectorAll('button').forEach(b => {
+      const send = (e) => { e.preventDefault(); setDir(b.dataset.dir); };
+      b.addEventListener('click', send);
+      b.addEventListener('touchstart', send, {passive:false});
+    });
+
+    let tStart = null;
+    canvas.addEventListener('touchstart', (e) => {
+      const t = e.touches[0]; tStart = {x:t.clientX, y:t.clientY};
+    }, {passive:true});
+    canvas.addEventListener('touchend', (e) => {
+      if (!tStart) return;
+      const t = e.changedTouches[0];
+      const dx = t.clientX - tStart.x, dy = t.clientY - tStart.y;
+      if (Math.abs(dx) < 20 && Math.abs(dy) < 20) return;
+      if (Math.abs(dx) > Math.abs(dy)) setDir(dx > 0 ? 'right' : 'left');
+      else setDir(dy > 0 ? 'down' : 'up');
+      tStart = null;
+    }, {passive:true});
+
+    reset();
+  })();
 
   // ── Konami code easter egg ─────────────────────────────────────────────────
   const konami = [38,38,40,40,37,39,37,39,66,65];
