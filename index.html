@@ -354,6 +354,38 @@
   .contact-btn.yellow { border-color: var(--yellow); color: var(--yellow); }
   .contact-btn.yellow:hover { background: var(--yellow); color: var(--bg); box-shadow: 0 0 15px var(--yellow); }
 
+  /* EMAIL REVEAL + TOAST */
+  .email-reveal {
+    margin-top: 18px;
+    font-family: 'VT323', monospace;
+    font-size: clamp(18px, 2.5vw, 24px);
+    color: var(--cyan);
+    min-height: 1em;
+    word-break: break-all;
+  }
+  .email-reveal a { color: var(--cyan); text-decoration: none; border-bottom: 1px dashed var(--cyan); }
+  .email-reveal a:hover { color: var(--yellow); border-color: var(--yellow); }
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(120%);
+    background: var(--panel);
+    border: 2px solid var(--green);
+    color: var(--green);
+    font-family: 'Press Start 2P', monospace;
+    font-size: clamp(9px, 1.1vw, 11px);
+    padding: 12px 18px;
+    box-shadow: 0 0 15px rgba(0,255,65,0.35);
+    z-index: 3000;
+    opacity: 0;
+    transition: transform 0.35s ease, opacity 0.35s ease;
+    pointer-events: none;
+    max-width: 90vw;
+    text-align: center;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
   footer {
     text-align: center;
     padding: 30px 20px;
@@ -926,10 +958,12 @@
     </div>
     <div class="contact-links">
       <button type="button" class="contact-btn" id="email-btn" data-u="Y29udGFjdG8=" data-d="Ym9yYWl0YS5lcw==" aria-label="Email">📧 EMAIL</button>
-      <noscript><span style="color:#666;font-size:10px;">contacto [at] boraita [dot] es</span></noscript>
-      <a href="https://linkedin.com/in/rafaelmontanoboraita" target="_blank" class="contact-btn cyan">💼 LINKEDIN</a>
-      <a href="https://github.com/boraita" target="_blank" class="contact-btn yellow">🐙 GITHUB</a>
+      <a href="https://linkedin.com/in/rafaelmontanoboraita" target="_blank" rel="noopener" class="contact-btn cyan">💼 LINKEDIN</a>
+      <a href="https://github.com/boraita" target="_blank" rel="noopener" class="contact-btn yellow">🐙 GITHUB</a>
     </div>
+    <noscript><div style="color:#666;font-size:10px;margin-top:14px;">contacto [at] boraita [dot] es</div></noscript>
+    <div id="email-reveal" class="email-reveal" aria-live="polite"></div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
     <div style="margin-top:24px; color:#333; font-size:7px;">
       BORAITA.ES · GRANADA, SPAIN · PLAYER IS ONLINE ●
     </div>
@@ -1038,14 +1072,53 @@
     });
   })();
 
-  // ── Email obfuscation (reveal on click, no plain address in HTML) ─────────
+  // ── Email obfuscation: reveal, copy, and try mailto ───────────────────────
   (function(){
     const btn = document.getElementById('email-btn');
+    const reveal = document.getElementById('email-reveal');
+    const toast = document.getElementById('toast');
     if (!btn) return;
-    btn.addEventListener('click', () => {
-      const u = atob(btn.dataset.u);
-      const d = atob(btn.dataset.d);
-      window.location.href = 'mailto:' + u + '@' + d;
+
+    function showToast(msg) {
+      if (!toast) return;
+      toast.textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(() => toast.classList.remove('show'), 2600);
+    }
+
+    async function copyToClipboard(text) {
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+          return true;
+        }
+      } catch(_) {}
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        const ok = document.execCommand('copy');
+        document.body.removeChild(ta);
+        return ok;
+      } catch(_) { return false; }
+    }
+
+    btn.addEventListener('click', async () => {
+      const email = atob(btn.dataset.u) + '@' + atob(btn.dataset.d);
+      if (reveal && !reveal.dataset.shown) {
+        reveal.innerHTML = '► <a href="mailto:' + email + '">' + email + '</a>';
+        reveal.dataset.shown = '1';
+      }
+      const copied = await copyToClipboard(email);
+      const es = (document.body.className === 'lang-es');
+      showToast(copied
+        ? (es ? '📋 ' + email + ' copiado' : '📋 ' + email + ' copied')
+        : (es ? '📧 ' + email : '📧 ' + email));
+      window.location.href = 'mailto:' + email;
     });
   })();
 
